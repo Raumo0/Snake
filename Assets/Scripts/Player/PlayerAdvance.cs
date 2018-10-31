@@ -9,6 +9,8 @@ public class PlayerAdvance : MonoBehaviour
     private Vector2 direction;
     private Entity entity;
     private HeadController head;
+    private BodyController tail;
+    private Transform bodies;
 
     void Start()
     {
@@ -19,13 +21,15 @@ public class PlayerAdvance : MonoBehaviour
     void Awake()
     {
         move = true;
+        if (speed == 0f)
+            speed = 5f;
         for (int i = 0; i < transform.childCount; i++)
-        {
             if (transform.GetChild(i).gameObject.CompareTag("PlayerHead"))
-            {
                 head = transform.GetChild(i).gameObject.GetComponent<HeadController>();
-            }
-        }
+            else if (transform.GetChild(i).gameObject.CompareTag("PlayerBody"))
+                bodies = gameObject.transform.GetChild(i);
+            else if (transform.GetChild(i).gameObject.CompareTag("PlayerTail"))
+                tail = gameObject.transform.GetChild(i).gameObject.GetComponent<BodyController>();
     }
 
     private void FixedUpdate()
@@ -39,6 +43,24 @@ public class PlayerAdvance : MonoBehaviour
                 speed,
                 1);
         }
+        var variable = this.AdvanceBodies(head.values);
+        this.AdvanceTail(variable);
         entity = head.Advance(entity);
+    }
+
+    private Entity AdvanceBodies(Entity entity)
+    {
+        for (int i = 0; i < bodies.childCount; i++)
+        {
+            entity = bodies.GetChild(i).
+                gameObject.GetComponent<BodyController>().Advance(entity);
+        }
+        return entity;
+    }
+
+    private Entity AdvanceTail(Entity entity)
+    {
+        entity = tail.Advance(entity);
+        return entity;
     }
 }

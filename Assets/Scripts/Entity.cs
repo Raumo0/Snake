@@ -7,4 +7,15 @@ public class Entity {
     {
         this.position = position;
     }
+
+    public Entity GetClone(Entity entity)
+    {
+        if (entity == null)
+            entity = new Entity(new Vector2());
+        if (entity.position == null)
+            entity.position = new Vector2();
+        entity.position.x = this.position.x;
+        entity.position.y = this.position.y;
+        return entity;
+    }
 }
