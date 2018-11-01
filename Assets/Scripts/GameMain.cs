@@ -21,11 +21,6 @@ public class GameMain{
         return SingletonHolder.INSTANCE;
     }
 
-    private static class SingletonHolder
-    {
-        public static readonly GameMain INSTANCE = new GameMain();
-    }
-
     public T GetByIndex<T>(LinkedList<T> list, int index)
     {
         if (list == null || list.Count == 0 || index < 0 || index >= list.Count)
@@ -38,5 +33,10 @@ public class GameMain{
             i++;
         }
         return default(T);
+    }
+
+    private static class SingletonHolder
+    {
+        public static readonly GameMain INSTANCE = new GameMain();
     }
 }

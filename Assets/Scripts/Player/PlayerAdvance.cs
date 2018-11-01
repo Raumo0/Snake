@@ -23,6 +23,11 @@ public class PlayerAdvance : MonoBehaviour
         move = true;
         if (speed == 0f)
             speed = 5f;
+        initializeChildren();
+    }
+
+    private void initializeChildren()
+    {
         for (int i = 0; i < transform.childCount; i++)
             if (transform.GetChild(i).gameObject.CompareTag("PlayerHead"))
                 head = transform.GetChild(i).gameObject.GetComponent<HeadController>();

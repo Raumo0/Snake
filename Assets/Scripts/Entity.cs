@@ -18,4 +18,13 @@ public class Entity {
         entity.position.y = position.y;
         return entity;
     }
+
+    public void CopyPosition(Vector2 position)
+    {
+        if (position != null)
+        {
+            this.position.x = position.x;
+            this.position.y = position.y;
+        }
+    }
 }
