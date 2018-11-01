@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class GameMain{
     public int ScreenTop { get; private set; }
@@ -23,5 +24,19 @@ public class GameMain{
     private static class SingletonHolder
     {
         public static readonly GameMain INSTANCE = new GameMain();
+    }
+
+    public T GetByIndex<T>(LinkedList<T> list, int index)
+    {
+        if (list == null || list.Count == 0 || index < 0 || index >= list.Count)
+            return default(T);
+        int i = 0;
+        foreach (var value in list)
+        {
+            if (i == index)
+                return value;
+            i++;
+        }
+        return default(T);
     }
 }

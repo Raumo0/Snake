@@ -12,7 +12,7 @@ public class PartController : MonoBehaviour, Advance {
         values = new Entity(rgb2d.position);
     }
 
-    public Entity Advance(Entity entity)
+    public virtual Entity Advance(Entity entity)
     {
         Entity lastValue = values;
         values = entity;

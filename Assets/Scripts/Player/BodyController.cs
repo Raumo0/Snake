@@ -23,4 +23,34 @@ public class BodyController : PartController {
             for (int i = distance; i < parts.Count; i++)
                 parts.RemoveLast();
     }
+
+    public override Entity Advance(Entity entity)
+    {
+        if (entity == null || entity.position == null || parts == null)
+            return entity;
+
+        Entity lastElement = values;
+        if (parts.Count == 0)
+        {
+            values = entity;
+            return lastElement;
+        }
+        int len = parts.Count - 1;
+        values = GameMain.GetInstance().GetByIndex(parts, len);
+        Entity before;
+        Entity part;
+        for (int i = len; i > 0; i--)
+        {
+            before = GameMain.GetInstance().GetByIndex(parts, i - 1);
+            part = GameMain.GetInstance().GetByIndex(parts, i);
+            if (part.position.Equals(before.position))
+                continue;
+            part.position.x = before.position.x;
+            part.position.y = before.position.y;
+        }
+        Entity first = parts.First.Value;
+        first.position.x = entity.position.x;
+        first.position.y = entity.position.y;
+        return lastElement;
+    }
 }

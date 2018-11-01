@@ -14,8 +14,8 @@ public class Entity {
             entity = new Entity(new Vector2());
         if (entity.position == null)
             entity.position = new Vector2();
-        entity.position.x = this.position.x;
-        entity.position.y = this.position.y;
+        entity.position.x = position.x;
+        entity.position.y = position.y;
         return entity;
     }
 }

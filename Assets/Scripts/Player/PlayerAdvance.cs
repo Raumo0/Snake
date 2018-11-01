@@ -43,8 +43,8 @@ public class PlayerAdvance : MonoBehaviour
                 speed,
                 1);
         }
-        var variable = this.AdvanceBodies(head.values);
-        this.AdvanceTail(variable);
+        var variable = AdvanceBodies(head.values);
+        AdvanceTail(variable);//todo:set last body
         entity = head.Advance(entity);
     }
 
@@ -54,6 +54,7 @@ public class PlayerAdvance : MonoBehaviour
         {
             entity = bodies.GetChild(i).
                 gameObject.GetComponent<BodyController>().Advance(entity);
+            //todo: optimization
         }
         return entity;
     }
